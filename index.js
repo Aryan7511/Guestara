@@ -24,7 +24,7 @@ const start = async () => {
     if (err) {
       console.log('Error in server setup');
     } else {
-      console.log(`Server is running on http://localhost:${PORT}`);
+      console.log(`Server is running on PORT:${PORT}`);
     }
   });
 };

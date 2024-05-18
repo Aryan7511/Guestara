@@ -91,6 +91,16 @@ const createItem = async (req, res, next) => {
       ); // Not Found
     }
 
+    const totalAmount = parseFloat(baseAmount) - parseFloat(discount);
+    if (totalAmount <= 0) {
+      return next(
+        new CustomError(
+          'Discount can\'t be greater than base amount.',
+          40
+        )
+      );
+    }
+
     // Create new item instance
     const item = new Item({
       name: normalizedName,
@@ -100,7 +110,7 @@ const createItem = async (req, res, next) => {
       tax: taxApplicable ? tax || 0 : undefined,
       baseAmount: baseAmount,
       discount: discount,
-      totalAmount: parseFloat(baseAmount) - parseFloat(discount),
+      totalAmount: totalAmount,
       category: categoryObject?._id,
       subcategory: subcategoryObject?._id
     });
