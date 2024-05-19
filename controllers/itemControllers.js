@@ -96,7 +96,7 @@ const createItem = async (req, res, next) => {
       return next(
         new CustomError(
           'Discount can\'t be greater than base amount.',
-          40
+          400 //bad request
         )
       );
     }
